@@ -1,0 +1,19 @@
+.phoneForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    padding: 16px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.formLabel{
+    display:block;
+    margin-bottom: 16px;
+}
+
+.formInput{
+    display: block;
+    margin-top: 8px;
+}
