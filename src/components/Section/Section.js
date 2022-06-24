@@ -1,4 +1,4 @@
-import stl from './Section.module.css'
+
 
 const Section = ({title, children}) => {
     return (
