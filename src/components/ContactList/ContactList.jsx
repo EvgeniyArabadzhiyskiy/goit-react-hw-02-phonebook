@@ -1,10 +1,11 @@
 import ContactItem from './ContactItem/ContactItem';
+import { ListContact } from './ContactList.staled';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <ul>
+    <ListContact>
       <ContactItem contacts={contacts} onDeleteContact={onDeleteContact} />
-    </ul>
+    </ListContact>
   );
 };
 

@@ -73,6 +73,7 @@ export class App extends Component {
           <Section title="Phonebook">
             <PhoneForm addNewContact={this.addNewContact} />
           </Section>
+          
           <Section title="Find contacts by name">
             <FilterContacts
               value={this.state.filter}

@@ -1,9 +1,9 @@
-
+import Input from 'components/Input/Input';
 
 const FilterContacts = ({ value, onChangeInput }) => {
   return (
     <div>
-      <input type="text" name="search" value={value} onChange={onChangeInput} />
+      <Input type="text" name="search" value={value} onChange={onChangeInput} />
     </div>
   );
 };
