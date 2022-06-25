@@ -16,7 +16,12 @@ class PhoneForm extends Component {
   submitForm = evt => {
     evt.preventDefault();
     this.props.addNewContact(this.state);
+    this.resetForm()
   };
+
+  resetForm = () => {
+    this.setState({name: "", number: ""})
+  }
 
   render() {
     return (
