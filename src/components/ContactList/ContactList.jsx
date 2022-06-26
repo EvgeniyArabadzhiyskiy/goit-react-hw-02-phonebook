@@ -1,11 +1,11 @@
 import ContactItem from './ContactItem/ContactItem';
-import { ListContact } from './ContactList.staled';
+import { Box } from '../Box/Box';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <ListContact>
+    <Box border="normal" p={4} as="ul">
       <ContactItem contacts={contacts} onDeleteContact={onDeleteContact} />
-    </ListContact>
+    </Box>
   );
 };
 

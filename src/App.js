@@ -1,20 +1,14 @@
 import { Component } from 'react';
 import shortid from 'shortid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import userContacts from './userContacts';
 import Section from 'components/Section/Section';
 import Container from 'components/Container/Container';
 import PhoneForm from 'components/PhoneForm/PhoneForm';
 import ContactList from 'components/ContactList/ContactList';
 import FilterContacts from 'components/FilterContacts/FilterContacts';
-
-const userContacts = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  { id: 'id-5', name: 'Helen Rosso', number: '567-12-26' },
-  { id: 'id-6', name: 'Henrih Cooper', number: '298-91-45' },
-];
 
 export class App extends Component {
   state = {
@@ -23,11 +17,13 @@ export class App extends Component {
   };
 
   addNewContact = ({ name, number }) => {
-    const contactNames = this.state.contacts.map(contact => contact.name)
+    const foundТName = this.state.contacts.find(
+      contact => contact.name === name
+    );
 
-    if (contactNames.includes(name)) {
-      alert(`${name} is alredy in contacts`)
-      return
+    if (foundТName) {
+      toast.error(`${name} is alredy in contacts`);
+      return;
     }
 
     const newContact = {
@@ -38,19 +34,18 @@ export class App extends Component {
 
     this.setState(prevState => {
       return {
-        contacts: [newContact, ...prevState.contacts ],
+        contacts: [newContact, ...prevState.contacts],
       };
     });
   };
 
-  deleteContact = (contactID) => {
+  deleteContact = contactID => {
     this.setState(prevState => {
       return {
-        contacts: prevState.contacts.filter(({id}) => id !== contactID)
-      }
-    })
-
-  }
+        contacts: prevState.contacts.filter(({ id }) => id !== contactID),
+      };
+    });
+  };
 
   changeInput = evt => {
     this.setState({ filter: evt.target.value });
@@ -60,7 +55,7 @@ export class App extends Component {
     const normalizeContact = this.state.filter.toLowerCase();
 
     return this.state.contacts.filter(({ name }) => {
-      return name?.toLowerCase().includes(normalizeContact);
+      return name.toLowerCase().includes(normalizeContact);
     });
   };
 
@@ -73,7 +68,7 @@ export class App extends Component {
           <Section title="Phonebook">
             <PhoneForm addNewContact={this.addNewContact} />
           </Section>
-          
+
           <Section title="Find contacts by name">
             <FilterContacts
               value={this.state.filter}
@@ -82,9 +77,18 @@ export class App extends Component {
           </Section>
 
           <Section title="Contacts">
-            <ContactList contacts={filtredContacts} onDeleteContact={this.deleteContact} />
+            <ContactList
+              contacts={filtredContacts}
+              onDeleteContact={this.deleteContact}
+            />
           </Section>
         </Container>
+        <ToastContainer
+          autoClose={3000}
+          position="top-center"
+          theme="colored"
+          pauseOnHover
+        />
       </div>
     );
   }
