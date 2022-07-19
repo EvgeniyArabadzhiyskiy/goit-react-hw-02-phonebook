@@ -17,7 +17,14 @@ export class App extends Component {
   };
 
   addNewContact = ({ name, number }) => {
-   
+    const foundТName = this.state.contacts.find(
+      contact => contact.name === name
+    );
+
+    if (foundТName) {
+      toast.error(`${name} is alredy in contacts`);
+      return;
+    }
 
     const newContact = {
       id: shortid(),
@@ -25,24 +32,31 @@ export class App extends Component {
       number,
     };
 
-   
+    this.setState(prevState => {
+      return {
+        contacts: [newContact, ...prevState.contacts],
+      };
+    });
   };
 
   deleteContact = contactID => {
     this.setState(prevState => {
       return {
+        contacts: prevState.contacts.filter(({ id }) => id !== contactID),
       };
     });
   };
 
   changeInput = evt => {
-    this.setState({});
+    this.setState({ filter: evt.target.value });
   };
 
   visibleContacts = () => {
     const normalizeContact = this.state.filter.toLowerCase();
 
-    
+    return this.state.contacts.filter(({ name }) => {
+      return name.toLowerCase().includes(normalizeContact);
+    });
   };
 
   render() {
