@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Button from 'components/Button/Button';
 import { Box } from 'components/Box/Box';
-// import { UserName, UserNumber } from './ContactItem.styled';
+import { UserName, UserNumber } from './ContactItem.styled';
 
 const ContactItem = ({ contacts, onDeleteContact }) => {
   return (
@@ -16,7 +16,8 @@ const ContactItem = ({ contacts, onDeleteContact }) => {
             textAlign="left"
             as="li"
           >
-            
+            <UserName>{name}:</UserName>
+            <UserNumber>{number}</UserNumber>
             <Button onClick={() => onDeleteContact(id)}>Delete</Button>
           </Box>
         );
